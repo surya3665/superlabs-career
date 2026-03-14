@@ -1,0 +1,22 @@
+name: career-admin
+
+services:
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      VITE_API_URL: http://server:3000
+    ports:
+      - "6002:80"
+    networks:
+      - career-network
+
+networks:
+  career-network:
+    name: career-network
+    external: true
